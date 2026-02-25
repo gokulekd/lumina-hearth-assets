@@ -25,7 +25,6 @@ void main() async {
   );
 
   runApp(
-    // Wrap app in ProviderScope for Riverpod
     const ProviderScope(child: LuminaHearthApp()),
   );
 }
