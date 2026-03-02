@@ -94,9 +94,8 @@ class _AudioTrackSliderState extends State<AudioTrackSlider> {
                     Text(
                       widget.track.name,
                       style: TextStyle(
-                        color: isActive
-                            ? AppTheme.warmCream
-                            : AppTheme.mutedGray,
+                        color:
+                            isActive ? AppTheme.warmCream : AppTheme.mutedGray,
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
                         letterSpacing: 0.2,
@@ -116,13 +115,11 @@ class _AudioTrackSliderState extends State<AudioTrackSlider> {
                 const SizedBox(height: 6),
                 SliderTheme(
                   data: SliderThemeData(
-                    activeTrackColor: isActive
-                        ? AppTheme.emberOrange
-                        : AppTheme.deepSlate,
+                    activeTrackColor:
+                        isActive ? AppTheme.emberOrange : AppTheme.deepSlate,
                     inactiveTrackColor: AppTheme.deepSlate,
-                    thumbColor: isActive
-                        ? AppTheme.amberGold
-                        : AppTheme.mutedGray,
+                    thumbColor:
+                        isActive ? AppTheme.amberGold : AppTheme.mutedGray,
                     overlayColor: AppTheme.amberGold.withAlpha(30),
                     trackHeight: 3,
                     thumbShape: const RoundSliderThumbShape(
