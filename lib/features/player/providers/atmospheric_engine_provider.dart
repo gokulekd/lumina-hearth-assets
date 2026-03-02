@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/constants/scene_data.dart';
 import '../services/audio_mixer_service.dart';
+import 'scene_config_provider.dart';
 
 /// State for the currently active scene
 class SceneState {
@@ -32,7 +33,34 @@ class SceneState {
   }
 }
 
-List<AudioTrack> _tracksForScene(SceneId id) {
+String _mapSceneIdToString(SceneId id) {
+  switch (id) {
+    case SceneId.classicHearth:
+      return 'classic_hearth';
+    case SceneId.midnightForest:
+      return 'rain_forest';
+    case SceneId.coastalBreeze:
+      return 'river_side';
+    case SceneId.zenGarden:
+      return 'tibet_temple';
+    case SceneId.rainyCafe:
+      return 'hut_in_rain';
+    case SceneId.himalayanCabin:
+      return 'snowy_night';
+    default:
+      return 'classic_hearth'; // Fallback
+  }
+}
+
+List<AudioTrack> _tracksForScene(
+    SceneId id, Map<String, dynamic> remoteConfig) {
+  final stringId = _mapSceneIdToString(id);
+
+  if (remoteConfig.containsKey(stringId)) {
+    return List<AudioTrack>.from(remoteConfig[stringId]['tracks']);
+  }
+
+  // Fallback to local configs
   switch (id) {
     case SceneId.classicHearth:
       return SceneData.hearth();
@@ -42,27 +70,24 @@ List<AudioTrack> _tracksForScene(SceneId id) {
       return SceneData.cabin();
     case SceneId.coastalBreeze:
       return SceneData.coastal();
-    case SceneId.zenGarden:
-    case SceneId.deepSpace:
-    case SceneId.rainyCafe:
-    case SceneId.autumnBreeze:
-    case SceneId.crystalCave:
-    case SceneId.cherryBlossom:
-    case SceneId.underwaterReef:
-    case SceneId.desertNight:
+    default:
       return [];
   }
 }
 
 class AtmosphericEngineNotifier extends StateNotifier<SceneState> {
   final AudioMixerService _audioMixer;
+  final Map<String, dynamic> _remoteConfig;
 
-  AtmosphericEngineNotifier({required AudioMixerService audioMixer})
-      : _audioMixer = audioMixer,
+  AtmosphericEngineNotifier({
+    required AudioMixerService audioMixer,
+    required Map<String, dynamic> remoteConfig,
+  })  : _audioMixer = audioMixer,
+        _remoteConfig = remoteConfig,
         super(
           SceneState(
             scene: SceneData.all.first,
-            audioTracks: _tracksForScene(SceneId.classicHearth),
+            audioTracks: _tracksForScene(SceneData.all.first.id, remoteConfig),
           ),
         ) {
     // Load initial scene
@@ -72,14 +97,14 @@ class AtmosphericEngineNotifier extends StateNotifier<SceneState> {
       masterVolume: state.masterVolume,
     )
         .then((_) {
-      if (state.isPlaying) {
+      if (mounted && state.isPlaying) {
         _audioMixer.playAll();
       }
     });
   }
 
   void selectScene(SceneDefinition scene) {
-    final tracks = _tracksForScene(scene.id);
+    final tracks = _tracksForScene(scene.id, _remoteConfig);
     state = state.copyWith(
       scene: scene,
       audioTracks: tracks,
@@ -129,12 +154,6 @@ class AtmosphericEngineNotifier extends StateNotifier<SceneState> {
     // Update Audio mix
     _audioMixer.setTrackVolume(trackId, clamped);
   }
-
-  @override
-  void dispose() {
-    _audioMixer.dispose();
-    super.dispose();
-  }
 }
 
 final audioMixerProvider = Provider<AudioMixerService>((ref) {
@@ -147,6 +166,14 @@ final atmosphericEngineProvider =
     StateNotifierProvider<AtmosphericEngineNotifier, SceneState>(
   (ref) {
     final mixer = ref.watch(audioMixerProvider);
-    return AtmosphericEngineNotifier(audioMixer: mixer);
+    final remoteConfigAsync = ref.watch(remoteSceneConfigProvider);
+
+    // Pass empty map or the loaded remote config map
+    final configMap = remoteConfigAsync.valueOrNull ?? {};
+
+    return AtmosphericEngineNotifier(
+      audioMixer: mixer,
+      remoteConfig: configMap,
+    );
   },
 );
