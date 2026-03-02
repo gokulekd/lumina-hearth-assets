@@ -1,5 +1,5 @@
 {
-    "version": "1.0.0",
+    "version": "1.0.1",
     "scenes": [
         {
             "id": "classic_hearth",
@@ -7,29 +7,117 @@
             "video_url": "https://your-video-link.com/fire.mp4",
             "tracks": [
                 {
-                    "id": "fire_crackle",
-                    "name": "Cracking Wood",
-                    "url": "https://github.com/gokulekd/lumina-hearth-assets/releases/download/v1.0.0/fire.m4a",
+                    "id": "fireplace_1",
+                    "name": "Fireplace Crackle",
+                    "url": "https://github.com/user-attachments/files/25692817/fireplace1.wav",
                     "default_volume": 0.8
+                },
+                {
+                    "id": "fireplace_2",
+                    "name": "Deep Fire",
+                    "url": "https://github.com/user-attachments/files/25692818/fireplace2.mp3",
+                    "default_volume": 0.6
                 }
             ]
         },
         {
-            "id": "midnight_forest",
-            "name": "Midnight Forest",
+            "id": "rain_forest",
+            "name": "Rain Forest",
             "video_url": "https://your-video-link.com/forest.mp4",
             "tracks": [
                 {
-                    "id": "soft_rain",
-                    "name": "Rainfall",
-                    "url": "https://github.com/gokulekd/lumina-hearth-assets/releases/download/v1.0.0/rain.m4a",
+                    "id": "rain_forest_1",
+                    "name": "Gentle Rain",
+                    "url": "https://github.com/user-attachments/files/25692822/rain.forest.mp3",
                     "default_volume": 0.5
                 },
                 {
-                    "id": "distant_thunder",
-                    "name": "Thunder",
-                    "url": "https://github.com/gokulekd/lumina-hearth-assets/releases/download/v1.0.0/thunder.m4a",
-                    "default_volume": 0.3
+                    "id": "rain_forest_2",
+                    "name": "Deep Forest",
+                    "url": "https://github.com/user-attachments/files/25692821/rain.forest.2.mp3",
+                    "default_volume": 0.4
+                },
+                {
+                    "id": "bird_sounds",
+                    "name": "Birds",
+                    "url": "https://github.com/user-attachments/files/25692816/bird.sound.mp3",
+                    "default_volume": 0.6
+                }
+            ]
+        },
+        {
+            "id": "river_side",
+            "name": "River Side",
+            "video_url": "https://your-video-link.com/river.mp4",
+            "tracks": [
+                {
+                    "id": "river_water",
+                    "name": "Flowing River",
+                    "url": "https://github.com/user-attachments/files/25692824/river.side.mp3",
+                    "default_volume": 0.7
+                },
+                {
+                    "id": "river_birds",
+                    "name": "River Birds",
+                    "url": "https://github.com/user-attachments/files/25692825/river.side.bird.mp3",
+                    "default_volume": 0.4
+                }
+            ]
+        },
+        {
+            "id": "tibet_temple",
+            "name": "Tibet Temple",
+            "video_url": "https://your-video-link.com/temple.mp4",
+            "tracks": [
+                {
+                    "id": "temple_ambience_1",
+                    "name": "Temple Chant 1",
+                    "url": "https://github.com/user-attachments/files/25692831/tebet.temple.mp3",
+                    "default_volume": 0.6
+                },
+                {
+                    "id": "temple_ambience_2",
+                    "name": "Temple Chant 2",
+                    "url": "https://github.com/user-attachments/files/25692829/tebet.temple.2.mp3",
+                    "default_volume": 0.4
+                }
+            ]
+        },
+        {
+            "id": "hut_in_rain",
+            "name": "Hut in the Rain",
+            "video_url": "https://your-video-link.com/hut.mp4",
+            "tracks": [
+                {
+                    "id": "hut_rain",
+                    "name": "Rain on Roof",
+                    "url": "https://github.com/user-attachments/files/25692819/hut.rain.mp3",
+                    "default_volume": 0.7
+                },
+                {
+                    "id": "fireplace_indoor",
+                    "name": "Indoor Fire",
+                    "url": "https://github.com/user-attachments/files/25692817/fireplace1.wav",
+                    "default_volume": 0.5
+                }
+            ]
+        },
+        {
+            "id": "snowy_night",
+            "name": "Snowy Night",
+            "video_url": "https://your-video-link.com/snow.mp4",
+            "tracks": [
+                {
+                    "id": "snow_ambience",
+                    "name": "Falling Snow",
+                    "url": "https://github.com/user-attachments/files/25692827/snow.1.mp3",
+                    "default_volume": 0.8
+                },
+                {
+                    "id": "warm_fire",
+                    "name": "Warm Fire",
+                    "url": "https://github.com/user-attachments/files/25692818/fireplace2.mp3",
+                    "default_volume": 0.4
                 }
             ]
         }
