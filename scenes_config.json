@@ -114,9 +114,9 @@
                     "default_volume": 0.8
                 },
                 {
-                    "id": "warm_fire",
-                    "name": "Warm Fire",
-                    "url": "https://github.com/user-attachments/files/25692818/fireplace2.mp3",
+                    "id": "temple_ambience_2",
+                    "name": "Temple Chant 2",
+                    "url": "https://github.com/user-attachments/files/25692829/tebet.temple.2.mp3",
                     "default_volume": 0.4
                 }
             ]
