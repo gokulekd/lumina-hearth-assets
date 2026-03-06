@@ -26,7 +26,7 @@ class SceneConfigService {
             if (sceneId == 'river_side') return '🌊';
             if (sceneId == 'tibet_temple') return '🛕';
             if (sceneId == 'hut_in_rain') return '🛖';
-            if (sceneId == 'snowy_night') return '❄️';
+            if (sceneId == 'himalayan_cabin') return '❄️';
             return '🎵';
           }
 

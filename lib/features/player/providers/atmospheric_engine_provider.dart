@@ -46,7 +46,7 @@ String _mapSceneIdToString(SceneId id) {
     case SceneId.rainyCafe:
       return 'hut_in_rain';
     case SceneId.himalayanCabin:
-      return 'snowy_night';
+      return 'himalayan_cabin';
     default:
       return 'classic_hearth'; // Fallback
   }
