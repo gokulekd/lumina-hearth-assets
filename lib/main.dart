@@ -3,7 +3,11 @@ import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'core/theme/app_theme.dart';
+import 'core/theme/theme_provider.dart';
+import 'features/player/services/audio_handler.dart';
 import 'features/splash/presentation/splash_screen.dart';
+
+late AppAudioHandler _audioHandler;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -24,20 +28,31 @@ void main() async {
     ),
   );
 
+  _audioHandler = await initAudioService();
+
   runApp(
-    const ProviderScope(child: LuminaHearthApp()),
+    ProviderScope(
+      overrides: [
+        audioHandlerProvider.overrideWithValue(_audioHandler),
+      ],
+      child: const LuminaHearthApp(),
+    ),
   );
 }
 
-class LuminaHearthApp extends StatelessWidget {
+class LuminaHearthApp extends ConsumerWidget {
   const LuminaHearthApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final currentThemeMode = ref.watch(themeProvider);
+    
     return MaterialApp(
       title: 'Lumina Hearth',
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.darkTheme,
+      theme: AppTheme.lightTheme,
+      darkTheme: AppTheme.darkTheme,
+      themeMode: currentThemeMode,
       home: const SplashScreen(),
       // Enable edge-to-edge
       builder: (context, child) {

@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../core/theme/app_theme.dart';
+import '../core/theme/theme_provider.dart';
 
-class AppDrawer extends StatelessWidget {
+class AppDrawer extends ConsumerWidget {
   const AppDrawer({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
+    final isDark = ref.watch(themeProvider) == ThemeMode.dark;
     return Drawer(
       backgroundColor: Colors.transparent, // We want to control the background
       child: Container(
         decoration: BoxDecoration(
-          color: AppTheme.backgroundDark,
+          color: isDark ? AppTheme.backgroundDark : AppTheme.warmCream,
           border: Border(
             right: BorderSide(
-              color: Colors.white.withAlpha(20),
+              color: isDark ? Colors.white.withAlpha(20) : AppTheme.deepSlate.withAlpha(20),
               width: 1,
             ),
           ),
@@ -53,10 +56,10 @@ class AppDrawer extends StatelessWidget {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
+                         Text(
                           'LUMINA',
                           style: TextStyle(
-                            color: AppTheme.warmCream,
+                            color: isDark ? AppTheme.warmCream : AppTheme.deepSlate,
                             fontSize: 20,
                             fontWeight: FontWeight.w800,
                             letterSpacing: 2.0,
@@ -65,7 +68,7 @@ class AppDrawer extends StatelessWidget {
                         Text(
                           'HEARTH',
                           style: TextStyle(
-                            color: AppTheme.emberOrange.withAlpha(200),
+                            color: isDark ? AppTheme.emberOrange.withAlpha(200) : AppTheme.emberOrange,
                             fontSize: 14,
                             fontWeight: FontWeight.w700,
                             letterSpacing: 2.0,
@@ -77,7 +80,7 @@ class AppDrawer extends StatelessWidget {
                 ),
               ),
 
-              const Divider(color: Colors.white10, height: 32),
+              Divider(color: isDark ? Colors.white10 : Colors.black12, height: 32),
 
               // Menu Items
               Expanded(
@@ -86,100 +89,114 @@ class AppDrawer extends StatelessWidget {
                   physics: const BouncingScrollPhysics(),
                   children: [
                     _buildDrawerItem(
+                      isDark: isDark,
                       icon: Icons.home_rounded,
                       title: 'Home',
                       isActive: true,
                       onTap: () => Navigator.pop(context),
                     ),
                     _buildDrawerItem(
+                      isDark: isDark,
                       icon: Icons.favorite_border_rounded,
                       title: 'Favorites',
                       onTap: () {
                         // Keep drawer open but show a coming soon snackbar
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Favorites - Coming Soon!"),
-                            backgroundColor: AppTheme.deepSlate,
+                           SnackBar(
+                            content: const Text("Favorites - Coming Soon!"),
+                            backgroundColor: isDark ? AppTheme.deepSlate : AppTheme.mutedGray,
                           ),
                         );
                       },
                     ),
                     _buildDrawerItem(
+                      isDark: isDark,
                       icon: Icons.timer_outlined,
                       title: 'Sleep History',
                       showComingSoon: true,
                       onTap: () {
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Sleep History - Coming Soon!"),
-                            backgroundColor: AppTheme.deepSlate,
+                           SnackBar(
+                            content: const Text("Sleep History - Coming Soon!"),
+                            backgroundColor: isDark ? AppTheme.deepSlate : AppTheme.mutedGray,
                           ),
                         );
                       },
                     ),
                     _buildDrawerItem(
+                      isDark: isDark,
                       icon: Icons.settings_rounded,
                       title: 'Settings',
                       onTap: () {
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Settings - Coming Soon!"),
-                            backgroundColor: AppTheme.deepSlate,
+                           SnackBar(
+                            content: const Text("Settings - Coming Soon!"),
+                            backgroundColor: isDark ? AppTheme.deepSlate : AppTheme.mutedGray,
                           ),
                         );
                       },
                     ),
                     _buildDrawerItem(
+                      isDark: isDark,
                       icon: Icons.info_outline_rounded,
                       title: 'About',
                       onTap: () {
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("About"),
-                            backgroundColor: AppTheme.deepSlate,
+                           SnackBar(
+                            content: const Text("About"),
+                            backgroundColor: isDark ? AppTheme.deepSlate : AppTheme.mutedGray,
                           ),
                         );
                       },
                     ),
                     _buildDrawerItem(
+                      isDark: isDark,
                       icon: Icons.privacy_tip_outlined,
                       title: 'Privacy Policy',
                       onTap: () {
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Privacy Policy"),
-                            backgroundColor: AppTheme.deepSlate,
+                           SnackBar(
+                            content: const Text("Privacy Policy"),
+                            backgroundColor: isDark ? AppTheme.deepSlate : AppTheme.mutedGray,
                           ),
                         );
                       },
                     ),
                     _buildDrawerItem(
+                      isDark: isDark,
                       icon: Icons.assignment_outlined,
                       title: 'Terms & Conditions',
                       onTap: () {
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Terms & Conditions"),
-                            backgroundColor: AppTheme.deepSlate,
+                           SnackBar(
+                            content: const Text("Terms & Conditions"),
+                            backgroundColor: isDark ? AppTheme.deepSlate : AppTheme.mutedGray,
                           ),
                         );
                       },
                     ),
+                    _buildThemeToggleItem(
+                      isDark: isDark,
+                      onToggle: (value) {
+                        ref.read(themeProvider.notifier).toggleTheme(value);
+                      },
+                    ),
                     _buildDrawerItem(
+                      isDark: isDark,
                       icon: Icons.logout_rounded,
                       title: 'Log Out',
                       onTap: () {
                         Navigator.pop(context);
                         ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text("Logged Out"),
-                            backgroundColor: AppTheme.deepSlate,
+                           SnackBar(
+                            content: const Text("Logged Out"),
+                            backgroundColor: isDark ? AppTheme.deepSlate : AppTheme.mutedGray,
                           ),
                         );
                       },
@@ -188,7 +205,7 @@ class AppDrawer extends StatelessWidget {
                 ),
               ),
 
-              const Divider(color: Colors.white10, height: 32),
+              Divider(color: isDark ? Colors.white10 : Colors.black12, height: 32),
 
               // Footer
               Padding(
@@ -211,11 +228,11 @@ class AppDrawer extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(width: 12),
-                        const Expanded(
+                        Expanded(
                           child: Text(
                             'Lumina Pro',
                             style: TextStyle(
-                              color: AppTheme.warmCream,
+                              color: isDark ? AppTheme.warmCream : AppTheme.deepSlate,
                               fontWeight: FontWeight.w600,
                             ),
                           ),
@@ -223,10 +240,10 @@ class AppDrawer extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 8),
-                    const Text(
+                     Text(
                       'Version 1.0.0',
                       style: TextStyle(
-                        color: AppTheme.mutedGray,
+                        color: isDark ? AppTheme.mutedGray : AppTheme.deepSlate.withAlpha(150),
                         fontSize: 12,
                       ),
                     ),
@@ -241,6 +258,7 @@ class AppDrawer extends StatelessWidget {
   }
 
   Widget _buildDrawerItem({
+    required bool isDark,
     required IconData icon,
     required String title,
     bool isActive = false,
@@ -257,10 +275,10 @@ class AppDrawer extends StatelessWidget {
         child: Container(
           padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
           decoration: BoxDecoration(
-            color: isActive ? Colors.white.withAlpha(10) : Colors.transparent,
+            color: isActive ? (isDark ? Colors.white.withAlpha(10) : Colors.black.withAlpha(10)) : Colors.transparent,
             borderRadius: BorderRadius.circular(16),
             border: Border.all(
-              color: isActive ? Colors.white.withAlpha(5) : Colors.transparent,
+              color: isActive ? (isDark ? Colors.white.withAlpha(5) : Colors.black.withAlpha(5)) : Colors.transparent,
             ),
           ),
           child: Row(
@@ -269,7 +287,7 @@ class AppDrawer extends StatelessWidget {
                 icon,
                 color: isActive
                     ? AppTheme.emberOrange
-                    : AppTheme.softWhite.withAlpha(160),
+                    : (isDark ? AppTheme.softWhite.withAlpha(160) : AppTheme.deepSlate.withAlpha(160)),
                 size: 24,
               ),
               const SizedBox(width: 16),
@@ -278,8 +296,8 @@ class AppDrawer extends StatelessWidget {
                   title,
                   style: TextStyle(
                     color: isActive
-                        ? AppTheme.warmCream
-                        : AppTheme.softWhite.withAlpha(160),
+                        ? (isDark ? AppTheme.warmCream : AppTheme.deepSlate)
+                        : (isDark ? AppTheme.softWhite.withAlpha(160) : AppTheme.deepSlate.withAlpha(160)),
                     fontSize: 16,
                     fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
                   ),
@@ -309,6 +327,46 @@ class AppDrawer extends StatelessWidget {
                 ),
             ],
           ),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildThemeToggleItem({
+    required bool isDark,
+    required ValueChanged<bool> onToggle,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 8),
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 6),
+        child: Row(
+          children: [
+            Icon(
+              isDark ? Icons.dark_mode_rounded : Icons.light_mode_rounded,
+              color: isDark ? AppTheme.softWhite.withAlpha(160) : AppTheme.deepSlate.withAlpha(160),
+              size: 24,
+            ),
+            const SizedBox(width: 16),
+            Expanded(
+              child: Text(
+                isDark ? 'Dark Theme' : 'Light Theme',
+                style: TextStyle(
+                  color: isDark ? AppTheme.softWhite.withAlpha(160) : AppTheme.deepSlate.withAlpha(160),
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ),
+            Switch(
+              value: isDark,
+              onChanged: onToggle,
+              activeThumbColor: AppTheme.amberGold,
+              activeTrackColor: AppTheme.amberGold.withAlpha(50),
+              inactiveThumbColor: isDark ? AppTheme.mutedGray : AppTheme.deepSlate.withAlpha(100),
+              inactiveTrackColor: isDark ? AppTheme.deepSlate.withAlpha(50) : AppTheme.deepSlate.withAlpha(20),
+            ),
+          ],
         ),
       ),
     );

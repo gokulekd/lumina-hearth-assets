@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../../core/theme/app_theme.dart';
+import '../../../../core/theme/theme_extension.dart';
 
 class LightSyncScreen extends ConsumerWidget {
   const LightSyncScreen({super.key});
@@ -9,19 +10,19 @@ class LightSyncScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Scaffold(
-      backgroundColor: AppTheme.backgroundDark,
+      backgroundColor: context.scaffoldBgColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded,
-              color: AppTheme.softWhite),
+          icon: Icon(Icons.arrow_back_ios_new_rounded,
+              color: context.iconColor),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text(
+        title: Text(
           'Light Sync',
           style: TextStyle(
-            color: AppTheme.warmCream,
+            color: context.primaryTextColor,
             fontSize: 22,
             fontWeight: FontWeight.w700,
             letterSpacing: -0.5,
@@ -52,10 +53,10 @@ class LightSyncScreen extends ConsumerWidget {
                     size: 64, color: AppTheme.amberGold),
               ),
               const SizedBox(height: 32),
-              const Text(
+              Text(
                 'Immersive Lighting',
                 style: TextStyle(
-                  color: AppTheme.warmCream,
+                  color: context.primaryTextColor,
                   fontSize: 28,
                   fontWeight: FontWeight.w800,
                   letterSpacing: -0.5,
@@ -63,10 +64,10 @@ class LightSyncScreen extends ConsumerWidget {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
-              const Text(
+              Text(
                 'Connect your smart lights (Philips Hue, LIFX) to sync the ambient glow with the current scene for a fully immersive experience.',
                 style: TextStyle(
-                  color: AppTheme.mutedGray,
+                  color: context.mutedTextColor,
                   fontSize: 16,
                   height: 1.5,
                 ),
@@ -77,7 +78,7 @@ class LightSyncScreen extends ConsumerWidget {
                 width: double.infinity,
                 child: ElevatedButton.icon(
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: AppTheme.backgroundCard,
+                    backgroundColor: context.cardBgColor,
                     padding: const EdgeInsets.symmetric(vertical: 20),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(16),
@@ -86,18 +87,18 @@ class LightSyncScreen extends ConsumerWidget {
                   ),
                   onPressed: () {
                     ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Scanning for devices on network...'),
-                        backgroundColor: AppTheme.deepSlate,
+                      SnackBar(
+                        content: const Text('Scanning for devices on network...'),
+                        backgroundColor: context.isDark ? AppTheme.deepSlate : AppTheme.mutedGray,
                       ),
                     );
                   },
                   icon:
                       const Icon(Icons.wifi_rounded, color: AppTheme.amberGold),
-                  label: const Text(
+                  label: Text(
                     'Scan for Smart Lights',
                     style: TextStyle(
-                      color: AppTheme.warmCream,
+                      color: context.primaryTextColor,
                       fontSize: 16,
                       fontWeight: FontWeight.w600,
                     ),

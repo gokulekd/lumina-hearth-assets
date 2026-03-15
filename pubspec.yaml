@@ -18,9 +18,11 @@ dependencies:
   flutter_riverpod: ^2.5.1
 
   # Utilities
-  shared_preferences: ^2.3.2
+  shared_preferences: ^2.5.4
   just_audio: ^0.10.5
   http: ^1.6.0
+  audio_service: ^0.18.18
+  audio_session: ^0.2.2
 
 dev_dependencies:
   flutter_test:

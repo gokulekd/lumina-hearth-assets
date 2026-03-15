@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/constants/scene_data.dart';
 import '../../../core/theme/app_theme.dart';
+import '../../../core/theme/theme_extension.dart';
 import '../../../features/home/presentation/all_scenes_screen.dart';
 import '../../../features/mixer/presentation/mixer_screen.dart';
 import '../../../features/player/presentation/player_screen.dart';
@@ -59,7 +60,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
     final size = MediaQuery.of(context).size;
 
     return Scaffold(
-      backgroundColor: AppTheme.backgroundDark,
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       drawer: const AppDrawer(),
       body: CustomScrollView(
         physics: const BouncingScrollPhysics(),
@@ -70,7 +71,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
             toolbarHeight: 80,
             expandedHeight: 0,
             floating: true,
-            backgroundColor: AppTheme.backgroundDark,
+            backgroundColor: Theme.of(context).scaffoldBackgroundColor,
             flexibleSpace: const FlexibleSpaceBar(),
             title: SlideTransition(
               position: _headerSlideAnim,
@@ -105,10 +106,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                           ),
                         ),
                         const SizedBox(width: 10),
-                        const Text(
+                        Text(
                           'Lumina Hearth',
                           style: TextStyle(
-                            color: AppTheme.warmCream,
+                            color: context.primaryTextColor,
                             fontSize: 24,
                             fontWeight: FontWeight.w800,
                             letterSpacing: -0.5,
@@ -160,9 +161,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   ),
                 ),
               IconButton(
-                icon: const Icon(
+                icon: Icon(
                   Icons.person_outline_rounded,
-                  color: AppTheme.softWhite,
+                  color: context.iconColor,
                 ),
                 onPressed: () => _showProfileSheet(context),
               ),
@@ -187,36 +188,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                 // ── Section: Scenes ───────────────────────────────
                 Padding(
                   padding: const EdgeInsets.fromLTRB(20, 28, 20, 14),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Atmospheres',
-                        style: TextStyle(
-                          color: AppTheme.warmCream,
-                          fontSize: 22,
-                          fontWeight: FontWeight.w700,
-                          letterSpacing: -0.5,
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const AllScenesScreen(),
-                            ),
-                          );
-                        },
-                        child: const Text(
-                          'See All',
-                          style: TextStyle(
-                            color: AppTheme.emberOrange,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ],
+                  child: Text(
+                    'Atmospheres',
+                    style: TextStyle(
+                      color: context.primaryTextColor,
+                      fontSize: 22,
+                      fontWeight: FontWeight.w700,
+                      letterSpacing: -0.5,
+                    ),
                   ),
                 ),
 
@@ -247,13 +226,45 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   ),
                 ),
 
+                // ── See All Button ───────────────────────────────
+                Padding(
+                  padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                  child: Center(
+                    child: TextButton(
+                      style: TextButton.styleFrom(
+                        padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),
+                        backgroundColor: context.cardBgColor,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(12),
+                          side: BorderSide(color: AppTheme.emberOrange.withAlpha(50)),
+                        ),
+                      ),
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const AllScenesScreen(),
+                          ),
+                        );
+                      },
+                      child: const Text(
+                        'See All',
+                        style: TextStyle(
+                          color: AppTheme.emberOrange,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+
                 // ── Features Section ───────────────────────────────
-                const Padding(
-                  padding: EdgeInsets.fromLTRB(20, 32, 20, 14),
+                Padding(
+                  padding: const EdgeInsets.fromLTRB(20, 32, 20, 14),
                   child: Text(
                     'Features',
                     style: TextStyle(
-                      color: AppTheme.warmCream,
+                      color: context.primaryTextColor,
                       fontSize: 22,
                       fontWeight: FontWeight.w700,
                       letterSpacing: -0.5,
@@ -302,10 +313,10 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
             ),
           ),
           const SizedBox(height: 6),
-          const Text(
+          Text(
             'Ready to relax?',
             style: TextStyle(
-              color: AppTheme.warmCream,
+              color: context.primaryTextColor,
               fontSize: 34,
               fontWeight: FontWeight.w900,
               letterSpacing: -1.0,
@@ -419,7 +430,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   Text(
                     engineState.scene.name,
                     style: TextStyle(
-                      color: AppTheme.warmCream,
+                      color: Colors.white,
                       fontSize: 32,
                       fontWeight: FontWeight.w900,
                       letterSpacing: -1.0,
@@ -501,9 +512,9 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
         margin: const EdgeInsets.fromLTRB(16, 12, 16, 0),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
-          color: AppTheme.backgroundCard,
+          color: context.cardBgColor,
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Colors.white.withAlpha(12), width: 1),
+          border: Border.all(color: context.dividerColor, width: 1),
         ),
         child: Row(
           children: [
@@ -516,8 +527,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                 children: [
                   Text(
                     state.scene.name,
-                    style: const TextStyle(
-                      color: AppTheme.warmCream,
+                    style: TextStyle(
+                      color: context.primaryTextColor,
                       fontSize: 13,
                       fontWeight: FontWeight.w600,
                     ),
@@ -525,7 +536,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   Text(
                     'Playing · Tap to open',
                     style: TextStyle(
-                      color: AppTheme.mutedGray.withAlpha(200),
+                      color: context.mutedTextColor,
                       fontSize: 11,
                     ),
                   ),
@@ -598,7 +609,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
               margin: const EdgeInsets.only(right: 12),
               padding: const EdgeInsets.all(16),
               decoration: BoxDecoration(
-                color: AppTheme.backgroundCard,
+                color: context.cardBgColor,
                 borderRadius: BorderRadius.circular(18),
                 border: Border.all(color: (f.$4).withAlpha(40), width: 1),
               ),
@@ -609,8 +620,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   const Spacer(),
                   Text(
                     f.$2,
-                    style: const TextStyle(
-                      color: AppTheme.warmCream,
+                    style: TextStyle(
+                      color: context.primaryTextColor,
                       fontSize: 13,
                       fontWeight: FontWeight.w700,
                     ),
@@ -618,8 +629,8 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   const SizedBox(height: 2),
                   Text(
                     f.$3,
-                    style: const TextStyle(
-                      color: AppTheme.mutedGray,
+                    style: TextStyle(
+                      color: context.mutedTextColor,
                       fontSize: 11,
                     ),
                   ),
@@ -773,13 +784,13 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
       isScrollControlled: true,
       builder: (ctx) => Container(
         padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-        decoration: const BoxDecoration(
-          color: AppTheme.backgroundDark,
-          borderRadius: BorderRadius.only(
+        decoration: BoxDecoration(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          borderRadius: const BorderRadius.only(
             topLeft: Radius.circular(32),
             topRight: Radius.circular(32),
           ),
-          boxShadow: [
+          boxShadow: const [
             BoxShadow(
               color: Colors.black54,
               blurRadius: 40,

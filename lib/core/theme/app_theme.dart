@@ -127,4 +127,105 @@ class AppTheme {
       useMaterial3: true,
     );
   }
+
+  static ThemeData get lightTheme {
+    return ThemeData(
+      brightness: Brightness.light,
+      scaffoldBackgroundColor: warmCream,
+      fontFamily: _fontFamily,
+      colorScheme: const ColorScheme.light(
+        primary: emberOrange,
+        secondary: amberGold,
+        surface: softWhite,
+        onPrimary: warmCream,
+        onSecondary: backgroundDark,
+        onSurface: deepSlate,
+      ),
+      textTheme: const TextTheme(
+        displayLarge: TextStyle(
+          fontFamily: _fontFamily,
+          color: deepSlate,
+          fontSize: 48,
+          fontWeight: FontWeight.w700,
+          letterSpacing: -1.5,
+        ),
+        displayMedium: TextStyle(
+          fontFamily: _fontFamily,
+          color: deepSlate,
+          fontSize: 36,
+          fontWeight: FontWeight.w600,
+          letterSpacing: -1,
+        ),
+        headlineLarge: TextStyle(
+          fontFamily: _fontFamily,
+          color: deepSlate,
+          fontSize: 28,
+          fontWeight: FontWeight.w600,
+          letterSpacing: -0.5,
+        ),
+        headlineMedium: TextStyle(
+          fontFamily: _fontFamily,
+          color: deepSlate,
+          fontSize: 22,
+          fontWeight: FontWeight.w600,
+        ),
+        headlineSmall: TextStyle(
+          fontFamily: _fontFamily,
+          color: deepSlate,
+          fontSize: 18,
+          fontWeight: FontWeight.w500,
+        ),
+        bodyLarge: TextStyle(
+          fontFamily: _fontFamily,
+          color: backgroundCard,
+          fontSize: 16,
+          fontWeight: FontWeight.w400,
+        ),
+        bodyMedium: TextStyle(
+          fontFamily: _fontFamily,
+          color: backgroundCard,
+          fontSize: 14,
+          fontWeight: FontWeight.w400,
+        ),
+        labelLarge: TextStyle(
+          fontFamily: _fontFamily,
+          color: amberGold, // Amber pops on light too
+          fontSize: 13,
+          fontWeight: FontWeight.w600,
+          letterSpacing: 1.2,
+        ),
+        labelMedium: TextStyle(
+          fontFamily: _fontFamily,
+          color: mutedGray,
+          fontSize: 12,
+          fontWeight: FontWeight.w400,
+          letterSpacing: 0.5,
+        ),
+      ),
+      appBarTheme: const AppBarTheme(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        scrolledUnderElevation: 0,
+        centerTitle: false,
+        iconTheme: IconThemeData(color: backgroundDark),
+        titleTextStyle: TextStyle(
+          fontFamily: _fontFamily,
+          color: backgroundDark,
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+      sliderTheme: SliderThemeData(
+        activeTrackColor: emberOrange,
+        inactiveTrackColor: softWhite,
+        thumbColor: amberGold,
+        overlayColor: amberGold.withAlpha(30),
+        trackHeight: 3,
+        thumbShape: const RoundSliderThumbShape(enabledThumbRadius: 8),
+      ),
+      iconTheme: const IconThemeData(color: backgroundDark, size: 24),
+      dividerColor: surfaceGlass, // using surfaceGlass as subtle divider
+      useMaterial3: true,
+    );
+  }
 }

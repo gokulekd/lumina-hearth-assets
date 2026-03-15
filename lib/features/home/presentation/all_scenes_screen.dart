@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/constants/scene_data.dart';
-import '../../../core/theme/app_theme.dart';
+import '../../../core/theme/theme_extension.dart';
 import '../../../features/player/presentation/player_screen.dart';
 import '../../../features/player/providers/atmospheric_engine_provider.dart';
 import '../../../widgets/scene_card.dart';
@@ -16,19 +16,19 @@ class AllScenesScreen extends ConsumerWidget {
     final engineState = ref.watch(atmosphericEngineProvider);
 
     return Scaffold(
-      backgroundColor: AppTheme.backgroundDark,
+      backgroundColor: context.scaffoldBgColor,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back_ios_new_rounded,
-              color: AppTheme.softWhite),
+          icon: Icon(Icons.arrow_back_ios_new_rounded,
+              color: context.iconColor),
           onPressed: () => Navigator.pop(context),
         ),
-        title: const Text(
+        title: Text(
           'All Atmospheres',
           style: TextStyle(
-            color: AppTheme.warmCream,
+            color: context.primaryTextColor,
             fontSize: 22,
             fontWeight: FontWeight.w700,
             letterSpacing: -0.5,

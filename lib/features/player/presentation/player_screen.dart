@@ -5,7 +5,10 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/constants/scene_data.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../features/player/providers/atmospheric_engine_provider.dart';
+import '../../../features/timer/presentation/alarm_sheet.dart';
+import '../../../features/timer/presentation/focus_timer_widget.dart';
 import '../../../features/timer/presentation/sleep_timer_sheet.dart';
+import '../../../features/timer/providers/alarm_provider.dart';
 import '../../../features/timer/providers/sleep_timer_provider.dart';
 import '../../../widgets/audio_track_slider.dart';
 
@@ -25,6 +28,7 @@ class _PlayerScreenState extends ConsumerState<PlayerScreen>
   late Animation<double> _pulseAnim;
   bool _showControls = true;
   bool _showMixer = false;
+  bool _showFocusTimer = false;
 
   @override
   void initState() {
@@ -76,14 +80,18 @@ class _PlayerScreenState extends ConsumerState<PlayerScreen>
   Widget build(BuildContext context) {
     final engineState = ref.watch(atmosphericEngineProvider);
     final timerState = ref.watch(sleepTimerProvider);
+    final alarmState = ref.watch(alarmProvider);
     final isTimerRunning = timerState.status == SleepTimerState.running;
+    final isAlarmSet = alarmState.isSet;
 
     // Fade opacity based on sleep timer
     final timerOpacity = isTimerRunning ? timerState.progress : 1.0;
 
-    return Scaffold(
-      backgroundColor: AppTheme.backgroundDark,
-      body: GestureDetector(
+    return Theme(
+      data: AppTheme.darkTheme,
+      child: Scaffold(
+        backgroundColor: AppTheme.backgroundDark,
+        body: GestureDetector(
         onTap: _toggleControls,
         child: AnimatedOpacity(
           opacity: timerOpacity.clamp(0.1, 1.0),
@@ -134,6 +142,14 @@ class _PlayerScreenState extends ConsumerState<PlayerScreen>
                 ),
               ),
 
+              if (_showFocusTimer && !_showMixer)
+                Positioned(
+                  top: MediaQuery.of(context).size.height * 0.25,
+                  left: 0,
+                  right: 0,
+                  child: const Center(child: FocusTimerWidget()),
+                ),
+
               // Timer badge (always visible when timer running)
               if (isTimerRunning && !_showControls)
                 Positioned(
@@ -141,11 +157,19 @@ class _PlayerScreenState extends ConsumerState<PlayerScreen>
                   right: 16,
                   child: _TimerBadge(timerState: timerState),
                 ),
+
+              // Alarm badge 
+              if (isAlarmSet && !_showControls)
+                Positioned(
+                  top: MediaQuery.of(context).padding.top + 12 + (isTimerRunning ? 40 : 0),
+                  right: 16,
+                  child: _AlarmBadge(alarmState: alarmState),
+                ),
             ],
           ),
         ),
       ),
-    );
+    ));
   }
 
   Widget _buildTopBar(BuildContext context, SceneState engineState) {
@@ -203,11 +227,18 @@ class _PlayerScreenState extends ConsumerState<PlayerScreen>
               ),
             ),
 
-            // Cast button
-            _GlassButton(
-              icon: Icons.cast_rounded,
-              onTap: () => _showFeatureSnackBar(context, 'Chromecast'),
-            ),
+              // Alarm button
+              _GlassButton(
+                icon: Icons.alarm_rounded,
+                onTap: () => _showAlarmSheet(context),
+              ),
+              const SizedBox(width: 8),
+
+              // Cast button
+              _GlassButton(
+                icon: Icons.cast_rounded,
+                onTap: () => _showFeatureSnackBar(context, 'Chromecast'),
+              ),
             const SizedBox(width: 8),
 
             // Settings / info
@@ -273,6 +304,15 @@ class _PlayerScreenState extends ConsumerState<PlayerScreen>
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              // Focus Timer
+              _ControlButton(
+                icon: Icons.timer_outlined,
+                label: 'Focus',
+                isActive: _showFocusTimer,
+                onTap: () => setState(() => _showFocusTimer = !_showFocusTimer),
+              ),
+              const SizedBox(width: 14),
+
               // Sleep Timer
               _ControlButton(
                 icon: isTimerRunning
@@ -285,7 +325,7 @@ class _PlayerScreenState extends ConsumerState<PlayerScreen>
                 onTap: () => _showSleepTimerSheet(context),
               ),
 
-              const SizedBox(width: 20),
+              const SizedBox(width: 14),
 
               // Play / Pause (large center button)
               GestureDetector(
@@ -321,7 +361,7 @@ class _PlayerScreenState extends ConsumerState<PlayerScreen>
                 ),
               ),
 
-              const SizedBox(width: 20),
+              const SizedBox(width: 14),
 
               // Mixer
               _ControlButton(
@@ -348,6 +388,14 @@ class _PlayerScreenState extends ConsumerState<PlayerScreen>
       context: context,
       backgroundColor: Colors.transparent,
       builder: (_) => const SleepTimerSheet(),
+    );
+  }
+
+  void _showAlarmSheet(BuildContext context) {
+    showModalBottomSheet(
+      context: context,
+      backgroundColor: Colors.transparent,
+      builder: (_) => const AlarmSheet(),
     );
   }
 
@@ -603,6 +651,53 @@ class _TimerBadge extends StatelessWidget {
             '$m:$s',
             style: const TextStyle(
               color: AppTheme.amberGold,
+              fontSize: 12,
+              fontWeight: FontWeight.w700,
+              fontFeatures: [FontFeature.tabularFigures()],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _AlarmBadge extends StatelessWidget {
+  final AlarmState alarmState;
+
+  const _AlarmBadge({required this.alarmState});
+
+  @override
+  Widget build(BuildContext context) {
+    final t = alarmState.wakeTime;
+    if (t == null) return const SizedBox.shrink();
+
+    final h = t.hour.toString().padLeft(2, '0');
+    final m = t.minute.toString().padLeft(2, '0');
+
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+      decoration: BoxDecoration(
+        color: Colors.blueAccent.withAlpha(40),
+        borderRadius: BorderRadius.circular(20),
+        border: Border.all(
+          color: Colors.blueAccent.withAlpha(120),
+          width: 1,
+        ),
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(
+            Icons.alarm_rounded,
+            color: Colors.blueAccent,
+            size: 14,
+          ),
+          const SizedBox(width: 5),
+          Text(
+            '$h:$m',
+            style: const TextStyle(
+              color: Colors.blueAccent,
               fontSize: 12,
               fontWeight: FontWeight.w700,
               fontFeatures: [FontFeature.tabularFigures()],
