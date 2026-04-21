@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 
 import '../../../core/constants/scene_data.dart';
@@ -51,7 +52,9 @@ class SceneConfigService {
         throw Exception('Failed to load scenes');
       }
     } catch (e) {
-      print("Error fetching remote config: $e");
+      if (kDebugMode) {
+        print("Error fetching remote config: $e");
+      }
       return {};
     }
   }
