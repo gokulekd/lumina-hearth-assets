@@ -6,11 +6,17 @@ import 'core/theme/app_theme.dart';
 import 'core/theme/theme_provider.dart';
 import 'features/player/services/audio_handler.dart';
 import 'features/splash/presentation/splash_screen.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 late AppAudioHandler _audioHandler;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
 
   // Lock to portrait orientation
   await SystemChrome.setPreferredOrientations([
@@ -35,20 +41,20 @@ void main() async {
       overrides: [
         audioHandlerProvider.overrideWithValue(_audioHandler),
       ],
-      child: const LuminaHearthApp(),
+      child: const BreathNoiseApp(),
     ),
   );
 }
 
-class LuminaHearthApp extends ConsumerWidget {
-  const LuminaHearthApp({super.key});
+class BreathNoiseApp extends ConsumerWidget {
+  const BreathNoiseApp({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentThemeMode = ref.watch(themeProvider);
     
     return MaterialApp(
-      title: 'Lumina Hearth',
+      title: 'Breath Noise',
       debugShowCheckedModeBanner: false,
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,

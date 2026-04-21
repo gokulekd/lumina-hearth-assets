@@ -1,5 +1,5 @@
-name: lumina_hearth
-description: "Lumina Hearth - Premium Ambient Environment App for Deep Focus, Sleep & Relaxation."
+name: breath_noise
+description: "Breath Noise - Premium Ambient Environment App for Deep Focus, Sleep & Relaxation."
 publish_to: 'none'
 
 version: 1.0.0+1
@@ -23,11 +23,19 @@ dependencies:
   http: ^1.6.0
   audio_service: ^0.18.18
   audio_session: ^0.2.2
+  firebase_core: ^4.5.0
+  google_fonts: ^8.0.2
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^4.0.0
+  flutter_launcher_icons: ^0.13.1
+
+flutter_launcher_icons:
+  android: "launcher_icon"
+  ios: true
+  image_path: "Breath noise png/medium black.png"
 
 flutter:
   uses-material-design: true

@@ -87,7 +87,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                 ),
                 const SizedBox(height: 8),
                 const Text(
-                  'Join Lumina Hearth for a premium relaxing experience.',
+                  'Join Breath Noise for a premium relaxing experience.',
                   style: TextStyle(
                     color: AppTheme.mutedGray,
                     fontSize: 16,

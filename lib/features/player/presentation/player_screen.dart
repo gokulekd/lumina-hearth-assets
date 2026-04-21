@@ -429,7 +429,7 @@ class _PlayerScreenState extends ConsumerState<PlayerScreen>
   void _showFeatureSnackBar(BuildContext context, String feature) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('$feature — Coming in Lumina Pro 🚀'),
+        content: Text('$feature — Coming in Breath Noise Pro 🚀'),
         backgroundColor: AppTheme.deepSlate,
         behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),

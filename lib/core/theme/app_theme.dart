@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
   // Color Palette — inspired by fire, wood, and midnight ambience
@@ -32,82 +33,62 @@ class AppTheme {
     end: Alignment.bottomRight,
   );
 
-  static const String _fontFamily = 'Outfit';
-
   static ThemeData get darkTheme {
     return ThemeData(
       brightness: Brightness.dark,
       scaffoldBackgroundColor: backgroundDark,
-      fontFamily: _fontFamily,
-      colorScheme: const ColorScheme.dark(
-        primary: emberOrange,
-        secondary: amberGold,
-        surface: backgroundCard,
-        onPrimary: warmCream,
-        onSecondary: backgroundDark,
-        onSurface: softWhite,
-      ),
-      textTheme: const TextTheme(
-        displayLarge: TextStyle(
-          fontFamily: _fontFamily,
+      textTheme: GoogleFonts.poppinsTextTheme().copyWith(
+        displayLarge: const TextStyle(
           color: warmCream,
           fontSize: 48,
           fontWeight: FontWeight.w700,
           letterSpacing: -1.5,
         ),
-        displayMedium: TextStyle(
-          fontFamily: _fontFamily,
+        displayMedium: const TextStyle(
           color: warmCream,
           fontSize: 36,
           fontWeight: FontWeight.w600,
           letterSpacing: -1,
         ),
-        headlineLarge: TextStyle(
-          fontFamily: _fontFamily,
+        headlineLarge: const TextStyle(
           color: warmCream,
           fontSize: 28,
           fontWeight: FontWeight.w600,
           letterSpacing: -0.5,
         ),
-        headlineMedium: TextStyle(
-          fontFamily: _fontFamily,
+        headlineMedium: const TextStyle(
           color: warmCream,
           fontSize: 22,
           fontWeight: FontWeight.w600,
         ),
-        headlineSmall: TextStyle(
-          fontFamily: _fontFamily,
+        headlineSmall: const TextStyle(
           color: warmCream,
           fontSize: 18,
           fontWeight: FontWeight.w500,
         ),
-        bodyLarge: TextStyle(
-          fontFamily: _fontFamily,
+        bodyLarge: const TextStyle(
           color: softWhite,
           fontSize: 16,
           fontWeight: FontWeight.w400,
         ),
-        bodyMedium: TextStyle(
-          fontFamily: _fontFamily,
+        bodyMedium: const TextStyle(
           color: softWhite,
           fontSize: 14,
           fontWeight: FontWeight.w400,
         ),
-        labelLarge: TextStyle(
-          fontFamily: _fontFamily,
+        labelLarge: const TextStyle(
           color: amberGold,
           fontSize: 13,
           fontWeight: FontWeight.w600,
           letterSpacing: 1.2,
         ),
-        labelMedium: TextStyle(
-          fontFamily: _fontFamily,
+        labelMedium: const TextStyle(
           color: mutedGray,
           fontSize: 12,
           fontWeight: FontWeight.w400,
           letterSpacing: 0.5,
         ),
-      ),
+      ).apply(bodyColor: softWhite, displayColor: warmCream),
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -132,76 +113,58 @@ class AppTheme {
     return ThemeData(
       brightness: Brightness.light,
       scaffoldBackgroundColor: warmCream,
-      fontFamily: _fontFamily,
-      colorScheme: const ColorScheme.light(
-        primary: emberOrange,
-        secondary: amberGold,
-        surface: softWhite,
-        onPrimary: warmCream,
-        onSecondary: backgroundDark,
-        onSurface: deepSlate,
-      ),
-      textTheme: const TextTheme(
-        displayLarge: TextStyle(
-          fontFamily: _fontFamily,
+      textTheme: GoogleFonts.poppinsTextTheme().copyWith(
+        displayLarge: const TextStyle(
           color: deepSlate,
           fontSize: 48,
           fontWeight: FontWeight.w700,
           letterSpacing: -1.5,
         ),
-        displayMedium: TextStyle(
-          fontFamily: _fontFamily,
+        displayMedium: const TextStyle(
           color: deepSlate,
           fontSize: 36,
           fontWeight: FontWeight.w600,
           letterSpacing: -1,
         ),
-        headlineLarge: TextStyle(
-          fontFamily: _fontFamily,
+        headlineLarge: const TextStyle(
           color: deepSlate,
           fontSize: 28,
           fontWeight: FontWeight.w600,
           letterSpacing: -0.5,
         ),
-        headlineMedium: TextStyle(
-          fontFamily: _fontFamily,
+        headlineMedium: const TextStyle(
           color: deepSlate,
           fontSize: 22,
           fontWeight: FontWeight.w600,
         ),
-        headlineSmall: TextStyle(
-          fontFamily: _fontFamily,
+        headlineSmall: const TextStyle(
           color: deepSlate,
           fontSize: 18,
           fontWeight: FontWeight.w500,
         ),
-        bodyLarge: TextStyle(
-          fontFamily: _fontFamily,
+        bodyLarge: const TextStyle(
           color: backgroundCard,
           fontSize: 16,
           fontWeight: FontWeight.w400,
         ),
-        bodyMedium: TextStyle(
-          fontFamily: _fontFamily,
+        bodyMedium: const TextStyle(
           color: backgroundCard,
           fontSize: 14,
           fontWeight: FontWeight.w400,
         ),
-        labelLarge: TextStyle(
-          fontFamily: _fontFamily,
+        labelLarge: const TextStyle(
           color: amberGold, // Amber pops on light too
           fontSize: 13,
           fontWeight: FontWeight.w600,
           letterSpacing: 1.2,
         ),
-        labelMedium: TextStyle(
-          fontFamily: _fontFamily,
+        labelMedium: const TextStyle(
           color: mutedGray,
           fontSize: 12,
           fontWeight: FontWeight.w400,
           letterSpacing: 0.5,
         ),
-      ),
+      ).apply(bodyColor: backgroundCard, displayColor: deepSlate),
       appBarTheme: const AppBarTheme(
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -209,7 +172,6 @@ class AppTheme {
         centerTitle: false,
         iconTheme: IconThemeData(color: backgroundDark),
         titleTextStyle: TextStyle(
-          fontFamily: _fontFamily,
           color: backgroundDark,
           fontSize: 20,
           fontWeight: FontWeight.w600,

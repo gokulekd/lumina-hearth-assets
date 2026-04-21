@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/constants/app_assets.dart';
 import '../../../core/constants/scene_data.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../../core/theme/theme_extension.dart';
@@ -100,14 +101,14 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                           child: ClipRRect(
                             borderRadius: BorderRadius.circular(10),
                             child: Image.asset(
-                              'assets/logo/lumina_logo2.png',
+                              AppAssets.appLogo,
                               fit: BoxFit.fill,
                             ),
                           ),
                         ),
                         const SizedBox(width: 10),
                         Text(
-                          'Lumina Hearth',
+                          'Breath Noise',
                           style: TextStyle(
                             color: context.primaryTextColor,
                             fontSize: 24,
@@ -678,7 +679,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
                   borderRadius: BorderRadius.circular(8),
                 ),
                 child: const Text(
-                  '✨ LUMINA PRO',
+                  '✨ BREATH NOISE PRO',
                   style: TextStyle(
                     color: AppTheme.amberGold,
                     fontSize: 11,
@@ -691,7 +692,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
           ),
           const SizedBox(height: 14),
           const Text(
-            'Unlock the full\nLumina experience',
+            'Unlock the full\nBreath Noise experience',
             style: TextStyle(
               color: AppTheme.warmCream,
               fontSize: 22,
@@ -837,7 +838,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen>
             ),
             const SizedBox(height: 24),
             const Text(
-              'Lumina Pro',
+              'Breath Noise Pro',
               style: TextStyle(
                 color: AppTheme.warmCream,
                 fontSize: 32,
@@ -1148,7 +1149,7 @@ class _ProfileSheet extends StatelessWidget {
           const SizedBox(height: 12),
 
           const Text(
-            'Lumina User',
+            'Breath Noise User',
             style: TextStyle(
               color: AppTheme.warmCream,
               fontSize: 18,

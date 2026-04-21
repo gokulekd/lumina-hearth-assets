@@ -79,7 +79,7 @@ class SceneData {
           name: 'Crackling Fire',
           emoji: '🔥',
           networkUrl:
-              'https://www.soundjay.com/nature/sounds/fire-burning-1.mp3',
+              'https://soundbible.com/grab.php?id=1543&type=mp3',
           volume: 0.8,
         ),
         AudioTrack(
@@ -93,7 +93,7 @@ class SceneData {
           id: 'rain_light',
           name: 'Light Rain',
           emoji: '🌧️',
-          networkUrl: 'https://www.soundjay.com/nature/sounds/rain-01.mp3',
+          networkUrl: 'https://soundbible.com/grab.php?id=2011&type=mp3',
           volume: 0.0,
         ),
       ];
@@ -103,14 +103,14 @@ class SceneData {
           id: 'rain_heavy',
           name: 'Heavy Rain',
           emoji: '🌧️',
-          networkUrl: 'https://www.soundjay.com/nature/sounds/rain-01.mp3',
+          networkUrl: 'https://soundbible.com/grab.php?id=2011&type=mp3',
           volume: 0.7,
         ),
         AudioTrack(
           id: 'thunder_distant',
           name: 'Thunder',
           emoji: '⛈️',
-          networkUrl: 'https://www.soundjay.com/nature/sounds/thunder-1.mp3',
+          networkUrl: 'https://soundbible.com/grab.php?id=2015&type=mp3',
           volume: 0.4,
         ),
         AudioTrack(
@@ -124,7 +124,7 @@ class SceneData {
           id: 'crickets',
           name: 'Night Crickets',
           emoji: '🦗',
-          networkUrl: 'https://www.soundjay.com/nature/sounds/crickets-1.mp3',
+          networkUrl: 'https://soundbible.com/grab.php?id=1253&type=mp3',
           volume: 0.0,
         ),
       ];
@@ -142,7 +142,7 @@ class SceneData {
           name: 'Soft Fireplace',
           emoji: '🔥',
           networkUrl:
-              'https://www.soundjay.com/nature/sounds/fire-burning-1.mp3',
+              'https://soundbible.com/grab.php?id=1543&type=mp3',
           volume: 0.6,
         ),
         AudioTrack(
@@ -157,7 +157,7 @@ class SceneData {
           name: 'Clock Ticking',
           emoji: '⏰',
           networkUrl:
-              'https://www.soundjay.com/clock/sounds/clock-ticking-2.mp3',
+              'https://soundbible.com/grab.php?id=1418&type=mp3',
           volume: 0.0,
         ),
       ];
@@ -167,7 +167,7 @@ class SceneData {
           id: 'waves',
           name: 'Ocean Waves',
           emoji: '🌊',
-          networkUrl: 'https://www.soundjay.com/nature/sounds/ocean-wave-1.mp3',
+          networkUrl: 'https://soundbible.com/grab.php?id=1936&type=mp3',
           volume: 0.8,
         ),
         AudioTrack(
@@ -188,7 +188,7 @@ class SceneData {
           id: 'rain_coastal',
           name: 'Rain',
           emoji: '🌧️',
-          networkUrl: 'https://www.soundjay.com/nature/sounds/rain-01.mp3',
+          networkUrl: 'https://soundbible.com/grab.php?id=2011&type=mp3',
           volume: 0.0,
         ),
       ];

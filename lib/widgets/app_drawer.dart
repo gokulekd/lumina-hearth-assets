@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../core/constants/app_assets.dart';
 import '../core/theme/app_theme.dart';
 import '../core/theme/theme_provider.dart';
 
@@ -47,7 +48,7 @@ class AppDrawer extends ConsumerWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(12),
                         child: Image.asset(
-                          'assets/logo/lumina_logo2.png',
+                          AppAssets.appLogo,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -57,7 +58,7 @@ class AppDrawer extends ConsumerWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                          Text(
-                          'LUMINA',
+                          'BREATH NOISE',
                           style: TextStyle(
                             color: isDark ? AppTheme.warmCream : AppTheme.deepSlate,
                             fontSize: 20,
@@ -230,7 +231,7 @@ class AppDrawer extends ConsumerWidget {
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
-                            'Lumina Pro',
+                            'Breath Noise Pro',
                             style: TextStyle(
                               color: isDark ? AppTheme.warmCream : AppTheme.deepSlate,
                               fontWeight: FontWeight.w600,

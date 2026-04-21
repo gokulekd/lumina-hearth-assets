@@ -12,8 +12,8 @@ Future<AppAudioHandler> initAudioService() async {
   return await AudioService.init(
     builder: () => AppAudioHandler(),
     config: const AudioServiceConfig(
-      androidNotificationChannelId: 'com.lumina_hearth.channel.audio',
-      androidNotificationChannelName: 'Lumina Hearth Audio',
+      androidNotificationChannelId: 'com.breath_noise.channel.audio',
+      androidNotificationChannelName: 'Breath Noise Audio',
       androidNotificationOngoing: true,
       androidStopForegroundOnPause: true,
     ),
@@ -41,8 +41,8 @@ class AppAudioHandler extends BaseAudioHandler with QueueHandler, SeekHandler {
     mediaItem.add(MediaItem(
       id: scene.id.toString(),
       title: scene.name,
-      artist: 'Lumina Hearth',
-      artUri: scene.imageAsset != null ? Uri.parse('asset:///${scene.imageAsset}') : null,
+      artist: 'Breath Noise',
+      artUri: null, // Avoids Invalid argument(s): No host specified in URI asset:///
     ));
   }
 

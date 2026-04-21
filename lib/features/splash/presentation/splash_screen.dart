@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../core/constants/app_assets.dart';
 import '../../../core/theme/app_theme.dart';
 import '../../auth/presentation/login_screen.dart';
 
@@ -93,7 +94,7 @@ class _SplashScreenState extends State<SplashScreen>
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(80),
                         child: Image.asset(
-                          'assets/logo/lumina_logo2.png',
+                          AppAssets.appLogo,
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -101,9 +102,8 @@ class _SplashScreenState extends State<SplashScreen>
                     const SizedBox(height: 40),
                     // Typography based on reference
                     const Text(
-                      'LUMINA',
+                      'BREATH NOISE',
                       style: TextStyle(
-                        fontFamily: 'Outfit',
                         color: Colors.white,
                         fontSize: 38,
                         fontWeight: FontWeight.w400,
@@ -112,9 +112,8 @@ class _SplashScreenState extends State<SplashScreen>
                     ),
                     const SizedBox(height: 4),
                     const Text(
-                      'HEARTH',
+                      'SOUNDS',
                       style: TextStyle(
-                        fontFamily: 'Outfit',
                         color: Color(0xFFF39C12), // Ember orange/gold hue
                         fontSize: 32,
                         fontWeight: FontWeight.w400,
